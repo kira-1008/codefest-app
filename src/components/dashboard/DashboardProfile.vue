@@ -126,6 +126,10 @@
               <div :class="$style.pkey">Resume(*.pdf)</div>
               <div :class="$style.pkey">
                 <form enctype="multipart/form-data">
+                
+                <label :class="$style.fileInput"> 
+                
+                  Select file
                 <input
                   type="file"
                   name="resume"
@@ -133,6 +137,9 @@
                     uploadResume($event.target.name, $event.target.files)
                   "
                 />
+                </label>
+                <label id="fileName"></label>
+                
               </form>
               </div>
           </div>
@@ -154,32 +161,100 @@
     </div>
 
     <div :class="$style.actionButtons">
+      <div :class="$style.wrapper">
+        <div :class="$style.top_design">
+          <hr :class="$style.line">
+          <div :class="$style.circle"></div>  
+        </div>
       <div :class="$style.link" @click="$router.push('/profile/edit')">
+      <div :class="$style.bck">
+            <div :class="$style.blck">
         <span :class="$style.linkText">
           <h4>Edit Profile</h4>
         </span>
+        </div>
+            </div>
       </div>
+      <div :class="$style.bottom_design">
+        <hr :class="$style.down"> 
+        <hr :class="$style.tilted">
+        <hr :class="$style.top">
+        <div :class="$style.circle"/>
+      </div>
+      </div>
+      <div :class="$style.wrapper">
+        
+        <div :class="$style.top_design">
+          <hr :class="$style.line">
+          <div :class="$style.circle"></div>  
+        </div>
+           
       <div
         :class="$style.link"
         @click="$router.push('/password/change')"
-        v-if="profile.provider === 'password'"
-      >
+       
+      ><div :class="$style.bck">
+            <div :class="$style.blck">
         <span :class="$style.linkText">
           <h4>Change Password</h4>
         </span>
+        </div>
+            </div>
       </div>
+      <div :class="$style.bottom_design">
+        <hr :class="$style.down"> 
+        <hr :class="$style.tilted">
+        <hr :class="$style.top">
+        <div :class="$style.circle"/>
+      </div>
+      </div>
+     
       <a v-if="!!certificate" :href="certificate" target="_blank">
+         <div :class="$style.wrapper">
+            <div :class="$style.top_design">
+          <hr :class="$style.line">
+          <div :class="$style.circle"></div>  
+        </div>
         <div :class="$style.link">
+           <div :class="$style.bck">
+            <div :class="$style.blck">
           <span :class="$style.linkText">
             <h4>Get Certificate</h4>
           </span>
+          </div>
+            </div>
+        </div>
+        <div :class="$style.bottom_design">
+        <hr :class="$style.down"> 
+        <hr :class="$style.tilted">
+        <hr :class="$style.top">
+        <div :class="$style.circle"/>
+      </div>
         </div>
       </a>
+      
+     
       <a v-if="!!resume" :href="resume" target="_blank">
+         <div :class="$style.wrapper">
+           <div :class="$style.top_design">
+          <hr :class="$style.line">
+          <div :class="$style.circle"></div>  
+        </div>
         <div :class="$style.link">
+          <div :class="$style.bck">
+            <div :class="$style.blck">
           <span :class="$style.linkText">
             <h4>View Resume</h4>
           </span>
+            </div>
+            </div>
+        </div>
+        <div :class="$style.bottom_design">
+        <hr :class="$style.down"> 
+        <hr :class="$style.tilted">
+        <hr :class="$style.top">
+        <div :class="$style.circle"/>
+      </div>
         </div>
       </a>
     </div>
@@ -285,6 +360,9 @@ export default {
         });
     },
     uploadResume(fieldName, fileList) {
+      
+      document.getElementById("fileName").innerHTML =fileList[0].name;
+      console.log("hehehy");
       var resumeFile = new FormData();
       if (!fileList.length) return;
       resumeFile.append(fieldName, fileList[0], fileList[0].name);
@@ -420,39 +498,120 @@ export default {
   .actionButtons {
     margin: 40px auto;
     text-align: center;
+    display:flex;
+    flex-flow:row;
+    justify-content: space-around;
+
+    .wrapper{
+      position:relative;
+        height:100px;
+        width:300px;
+       
+
+      .top_design{
+          .line{
+            position:absolute;
+            left:180px;
+            height:2px;
+            background-color:$blue-tint;
+            width:120px;
+          }
+          .circle{
+            position:absolute;
+            left:300px;
+            top:-8px;
+            height:20px;
+            width:20px;
+            border-radius:50%;
+            border:2px solid $blue-tint;
+          }
+      }
+      .bottom_design{
+        .down{
+            position:absolute;
+            height:2px;
+            left:120px;
+            width:132px;
+        }
+        .tilted{
+          position:absolute;
+          transform:rotate(-45deg);
+          width:60px;
+          left:242px;
+          height:2px;
+          bottom:24px;
+        }
+        .top{
+          position:absolute;
+            height:2px;
+            left:293px;
+            bottom:45px;
+            width:40px;
+        }
+        .circle{
+          position:absolute;
+            left:332px;
+            bottom:35px;
+            height:20px;
+            width:20px;
+            border-radius:50%;
+            border:2px solid $blue-tint;
+        }
+      }
+    }
+
+      
+
   }
 
   .link {
-    margin: 0 10px;
+    position:relative;
+    
+    margin: 10px 10px;
+  
+    height:70px;
     width: 260px;
     padding: 18px;
-    border-radius: 50px;
-    background-color: var(--background-color);
-    box-shadow: var(--small-icon-shadow);
+    background-color:$blue-tint;
     text-align: center;
     cursor: pointer;
     display: inline-block;
+    clip-path: polygon(10% 0, 100% 0, 100% 62%, 90% 100%, 0 100%, 0 38%);
+
+    .bck{
+        position:absolute;
+        top:1px;
+        left:1px;
+        right:1px;
+        bottom:1px;
+        clip-path: polygon(10% 0, 100% 0, 100% 62%, 90% 100%, 0 100%, 0 38%);
+        background:$mystic;
+    }
+    .blck{
+        position:absolute;
+        top:1px;
+        left:1px;
+        right:1px;
+        bottom:1px;
+        clip-path: polygon(10% 0, 100% 0, 100% 62%, 90% 100%, 0 100%, 0 38%);
+        background: radial-gradient(circle, rgba(7, 249, 254, 0.2), rgba(7, 249, 254, 0.1));
+       
+    }
 
     .linkText {
-      color: $waterloo;
-      display: inline;
-      text-decoration: none;
+     color:$blue-tint;
+     display:inline;
+      
 
       h4 {
         font-family: 'Roboto Slab';
         $font-size: 22px;
-        margin: 0;
+        margin-top:15px;
+        
       }
     }
 
-    &:hover {
-      box-shadow: var(--inset-small-icon-shadow);
-
-      .linkText {
-        color: var(--text-color);
-      }
-    }
-
+    
     ~/.xs ^[1..-1], ~/.sm ^[1..-1] {
       margin-bottom: 30px;
     }
@@ -601,8 +760,11 @@ export default {
         
           clip-path: polygon(5% 0, 100% 0, 100% 62%, 95% 100%, 0 100%, 0 38%);
           background:radial-gradient(circle, rgba(7, 249, 254, 0.2), rgba(7, 249, 254, 0.1));
-          
+
         }
+
+       
+
 
         .copyIcon {
           padding: 12px;
@@ -782,15 +944,24 @@ export default {
         margin-bottom: 20px;
         $font-size: 16px;
         display: flex;
-        flex-flow: row;
-        .left{
+        flex-direction: row;
+        text-align: center;
+         flex-wrap: nowrap;
+        justify-content: space-between;
+      align-items: center;
 
+        .left{
+          order:-2;
+          
         }
         .right{
-         right:0px;
+          float:right;
+          margin:0;
+          order:-1;
+          
         }
         .info_box {
-          position:absolute;
+          position:relative;
           height:70px;
           width:380px;
           background-color:$blue-tint;
@@ -800,7 +971,7 @@ export default {
           
 
         .bck{
-          position:absolute;
+      position:absolute;
           
           clip-path: polygon(5% 0, 100% 0, 100% 62%, 95% 100%, 0 100%, 0 38%);
           background-color:$mystic;
@@ -828,6 +999,20 @@ export default {
           font: 600 15px 'Roboto Slab';
           margin-top:5px;
           width:100%;
+        
+        input[type="file"] {
+          display: none !important;
+        }
+
+        .fileInput {
+          
+          position:relative;
+          padding:3px;
+          border:1px solid $blue-tint;
+          cursor: pointer;
+          font-weight:100;
+          
+        }
           
         }
 
@@ -841,11 +1026,12 @@ export default {
 
         }
       }
+      
 
       .resume_helptext{
          position:relative;
           height:70px;
-          width:1080px;
+          width:90%;
           margin:auto;
           background-color:$blue-tint;
           font: 500 20px 'Roboto Slab';
@@ -889,9 +1075,11 @@ export default {
         margin-bottom: 20px;
         $font-size: 16px;
         display: flex;
-        flex-flow: column;
         flex-direction:column;
-          width: 100%;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: center;
+         
           $font-size: 12px;
           .left{
             margin:auto;
@@ -909,6 +1097,9 @@ export default {
             order: 2;
             width: 100%;
           }
+        }
+        .resume_helptext{
+          height:100px;
         }
       }
 
